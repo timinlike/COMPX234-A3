@@ -58,6 +58,12 @@ def main():
             if len(key) > 999:
                 print(f"{line}: ERR Key too long")
                 continue
+                size = 6 + len(key)
+                if size > 999:
+                    print(f"{line}: ERR Message too long")
+                    continue
+                message = f"{size:03d} R {key}"
+
             # TASK 3: Send the message to the server, then receive the response.
             # - Send:    sock.sendall(message.encode())
             # - Receive: first read 3 bytes to get the response size (like the server does).
