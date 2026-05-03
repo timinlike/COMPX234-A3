@@ -78,6 +78,13 @@ def handle_client(client_socket):
             size_bytes = receive_n(client_socket, 3)
             if not size_bytes or len(size_bytes) < 3:
                 break
+                message_size = int(size_bytes.decode())
+                remaining_bytes = message_size - 3
+                message_buffer_bytes = receive_n(client_socket, remaining_bytes)
+
+                if not message_buffer_bytes or len(message_buffer_bytes) < remaining_bytes:
+                    break
+            message_buffer = (size_bytes + message_buffer_bytes).decode()
 
                 # Handle the request
             response = handle_request(message_buffer)
