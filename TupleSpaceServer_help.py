@@ -126,6 +126,9 @@ def handle_request(message):
         if key in tuple_space:
             value = tuple_space[key]
             return f"OK ({key}, {value}) read"
+        else:
+            increment_stat("error_count")
+            return f"ERR {key} does not exist"
 
         elif op == "G":
             # TASK 4: GET — remove key from tuple_space and return its value.
