@@ -76,7 +76,12 @@ def main():
                     print(f"{line}: ERR Message too long")
                     continue
                 message = f"{size:03d} G {key}"
-                
+                elif cmd == "PUT":
+                if len(parts) != 3:
+                    print(f"{line}: ERR Invalid format")
+                    continue
+                key = parts[1]
+                value = parts[2]
             # TASK 3: Send the message to the server, then receive the response.
             # - Send:    sock.sendall(message.encode())
             # - Receive: first read 3 bytes to get the response size (like the server does).
