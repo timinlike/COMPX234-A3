@@ -100,7 +100,7 @@ def main():
             # - Send:    sock.sendall(message.encode())
             # - Receive: first read 3 bytes to get the response size (like the server does).
             #            Then read the remaining (size - 3) bytes to get the response body.
-            sock.sendall(message.encode()
+            sock.sendall(message.encode())
             size_bytes = sock.recv(3)
             if not size_bytes:
                 print(f"{line}: ERR Connection closed by server")
