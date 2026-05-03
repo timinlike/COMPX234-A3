@@ -82,6 +82,13 @@ def main():
                     continue
                 key = parts[1]
                 value = parts[2]
+                if len(key) > 999 or len(value) > 999:
+                    print(f"{line}: ERR Key or value too long")
+                    continue
+                if len(key) + len(value) + 1 > 970:
+                    print(f"{line}: ERR Combined key+value exceeds 970 chars")
+                    continue
+
             # TASK 3: Send the message to the server, then receive the response.
             # - Send:    sock.sendall(message.encode())
             # - Receive: first read 3 bytes to get the response size (like the server does).
