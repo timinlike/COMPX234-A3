@@ -130,7 +130,7 @@ def handle_request(message):
             increment_stat("error_count")
             return f"ERR {key} does not exist"
 
-        elif op == "G":
+    elif op == "G":
             # TASK 4: GET — remove key from tuple_space and return its value.
             # Return "OK (<key>, <value>) removed" or "ERR <key> does not exist".
             # Hint: dict.pop(key, None) removes and returns the value, or None if missing.
@@ -154,7 +154,19 @@ else:
             # Validate: len(value) <= 999 and len(key + " " + value) <= 970.
             # Return "OK (<key>, <value>) added" or "ERR <key> already exists".
             increment_stat("put_count")
+if len(value) > 999:
+    increment_stat("error_count")
+    return "ERR Value too long"
+if len(key) + len(value) + 1 > 970:  # +1 for space separator
+    increment_stat("error_count")
+    return "ERR Combined key+value exceeds 970 chars"
 
+if key in tuple_space:
+    increment_stat("error_count")
+    return f"ERR {key} already exists"
+else:
+    tuple_space[key] = value
+    return f"OK ({key}, {value}) added"
 
         else:
             increment_stat("error_count")
