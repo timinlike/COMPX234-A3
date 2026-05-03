@@ -50,8 +50,11 @@ def main():
             # X is "R" for READ and "G" for GET.
             # Hint: for READ/GET, size = 6 + len(key). For PUT, size = 7 + len(key) + len(value).
             # Reject lines with invalid format or key+" "+value > 970 chars.
-
-
+            if cmd == "READ":
+                if len(parts) != 2:
+                    print(f"{line}: ERR Invalid format")
+                    continue
+            key = parts[1]
             # TASK 3: Send the message to the server, then receive the response.
             # - Send:    sock.sendall(message.encode())
             # - Receive: first read 3 bytes to get the response size (like the server does).
