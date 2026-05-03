@@ -24,7 +24,15 @@ def main():
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     sock.connect((hostname, port))
+    try:
+        for line in lines:
+            line = line.strip()
+            if not line:
+                continue
 
+            parts = line.split(" ", 2)
+            cmd = parts[0]
+            message = ""
     try:
         for line in lines:
             line = line.strip()
