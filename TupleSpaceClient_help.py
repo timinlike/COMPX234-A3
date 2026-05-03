@@ -117,7 +117,20 @@ def main():
     finally:
         # TASK 4: Close the socket when done (already called for you — explain why
         # finally: is the right place to do this even if an error occurs above).
-        sock.close()
+
+         sock.close()
+
+def receive_n(sock, num_bytes):
+    """Read exactly num_bytes from the socket."""
+    data = b""
+    while len(data) < num_bytes:
+        chunk = sock.recv(num_bytes - len(data))
+if __name__ == "__main__":
+    main()
+    if not chunk:
+        break
+    data += chunk
+    return data
 
 if __name__ == "__main__":
     main()
